@@ -154,8 +154,8 @@ jobs:
           key: ${{ inputs.platform }}-cargo-${{ hashFiles('node_modules/pake-cli/src-tauri/Cargo.lock') }}
 
       - name: Send Telegram Notification
-            if: always()
-            run: |
-              FILE_NAME="${{ inputs.platform }}-${{ inputs.name }}.zip"
-              curl -s -X POST https://api.telegram.org/bot7518333944:AAFwQrQIcU4HriivCciwe70yk-djhdp8wIs/sendMessage -d chat_id=-1002257173670 -d text="构建完成: ${{ inputs.name }} for ${{ inputs.platform }} 已生成: $FILE_NAME"
-              curl -F chat_id=-1002257173670 -F document=@node_modules/pake-cli/output/$FILE_NAME https://api.telegram.org/bot7518333944:AAFwQrQIcU4HriivCciwe70yk-djhdp8wIs/sendDocument
+        if: always()
+        run: |
+          FILE_NAME="${{ inputs.platform }}-${{ inputs.name }}.zip"
+          curl -s -X POST https://api.telegram.org/bot7518333944:AAFwQrQIcU4HriivCciwe70yk-djhdp8wIs/sendMessage -d chat_id=-1002257173670 -d text="构建完成: ${{ inputs.name }} for ${{ inputs.platform }} 已生成: $FILE_NAME"
+          curl -F chat_id=-1002257173670 -F document=@node_modules/pake-cli/output/$FILE_NAME https://api.telegram.org/bot7518333944:AAFwQrQIcU4HriivCciwe70yk-djhdp8wIs/sendDocument
