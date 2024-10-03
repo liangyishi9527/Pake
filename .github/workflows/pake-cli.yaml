@@ -143,6 +143,8 @@ jobs:
         if: always()
         run: |
           bash -c '
+          export LANG=zh_CN.UTF-8
+          export LC_ALL=zh_CN.UTF-8
           if [ "${{ inputs.platform }}" == "windows-latest" ]; then
             FILE_NAME="${{ inputs.name }}.msi"
           elif [ "${{ inputs.platform }}" == "macos-latest" ]; then
