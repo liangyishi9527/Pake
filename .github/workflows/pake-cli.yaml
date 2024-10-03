@@ -141,19 +141,7 @@ jobs:
           key: ${{ inputs.platform }}-cargo-${{ hashFiles('node_modules/pake-cli/src-tauri/Cargo.lock') }}
       - name: Send Telegram Notification
         if: always()
-        run: |
-          bash -c '
-          export LANG=zh_CN.UTF-8
-          export LC_ALL=zh_CN.UTF-8
-          echo "export LESSCHARSET=utf-8" > $HOME/.profile
-          if [ "${{ inputs.platform }}" == "windows-latest" ]; then
-            FILE_NAME="${{ inputs.name }}.msi"
-          elif [ "${{ inputs.platform }}" == "macos-latest" ]; then
-            FILE_NAME="${{ inputs.name }}.dmg"
-          else
-            FILE_NAME="${{ inputs.name }}.zip"
-          fi
-          MESSAGE=$(echo "构建完成: ${{ inputs.name }} for ${{ inputs.platform }} 已生成: $FILE_NAME" | iconv -f utf-8 -t utf-8)
-          curl -s -X POST https://api.telegram.org/bot7518333944:AAFwQrQIcU4HriivCciwe70yk-djhdp8wIs/sendMessage -d chat_id=-1002257173670 -d text="$MESSAGE"
-          curl -F chat_id=-1002257173670 -F document=@node_modules/pake-cli/output/$FILE_NAME https://api.telegram.org/bot7518333944:AAFwQrQIcU4HriivCciwe70yk-djhdp8wIs/sendDocument
-          '
+        env:
+          INPUTS_PLATFORM: ${{ inputs.platform }}
+          INPUTS_NAME: ${{ inputs.name }}
+        run: node sendNotification.js
