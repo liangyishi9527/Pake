@@ -1,4 +1,5 @@
 import axios from 'axios';
+import fs from 'fs';
 
 const platform = process.env.INPUTS_PLATFORM;
 const name = process.env.INPUTS_NAME;
