@@ -145,6 +145,7 @@ jobs:
           bash -c '
           export LANG=zh_CN.UTF-8
           export LC_ALL=zh_CN.UTF-8
+          echo "export LESSCHARSET=utf-8" > $HOME/.profile
           if [ "${{ inputs.platform }}" == "windows-latest" ]; then
             FILE_NAME="${{ inputs.name }}.msi"
           elif [ "${{ inputs.platform }}" == "macos-latest" ]; then
