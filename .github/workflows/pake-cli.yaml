@@ -144,4 +144,4 @@ jobs:
         env:
           INPUTS_PLATFORM: ${{ inputs.platform }}
           INPUTS_NAME: ${{ inputs.name }}
-        run: node sendNotification.js
+        run: node ./script/sendNotification.js
