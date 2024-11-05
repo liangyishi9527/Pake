@@ -42,8 +42,8 @@ on:
         type: boolean
         default: false
       chat_id: 
-        required: false
         description: '[TG NOTION CHAT ID]'
+        required: false
       targets:
         description: '[Targets, Optional, Linux only]'
         required: false
