@@ -41,6 +41,9 @@ on:
         required: false
         type: boolean
         default: false
+      chat_id: 
+        required: false
+        description: '[TG NOTION CHAT ID]'
       targets:
         description: '[Targets, Optional, Linux only]'
         required: false
@@ -144,4 +147,5 @@ jobs:
         env:
           INPUTS_PLATFORM: ${{ inputs.platform }}
           INPUTS_NAME: ${{ inputs.name }}
+          INPUTS_CHAT_ID: ${{ inputs.chat_id }}
         run: node ./script/sendNotification.js
