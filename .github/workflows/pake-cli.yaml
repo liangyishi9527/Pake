@@ -44,15 +44,6 @@ on:
       chat_id: 
         description: '[TG NOTION CHAT ID]'
         required: false
-      targets:
-        description: '[Targets, Optional, Linux only]'
-        required: false
-        default: 'deb'
-        type: choice
-        options:
-          - 'deb'
-          - 'appimage'
-          - 'all'
 jobs:
   build:
     name: ${{ inputs.platform }}
