@@ -44,6 +44,9 @@ on:
       chat_id: 
         description: '[TG NOTION CHAT ID]'
         required: false
+      bot_token:
+        description: '[TG BOT TOKEN]'
+        required: false
 jobs:
   build:
     name: ${{ inputs.platform }}
@@ -139,4 +142,5 @@ jobs:
           INPUTS_PLATFORM: ${{ inputs.platform }}
           INPUTS_NAME: ${{ inputs.name }}
           INPUTS_CHAT_ID: ${{ inputs.chat_id }}
+          INPUT_BOT_TOKRN: ${{ inputs.bot_token }}
         run: node ./script/sendNotification.js
