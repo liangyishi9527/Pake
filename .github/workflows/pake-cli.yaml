@@ -120,9 +120,9 @@ jobs:
           TARGETS: ${{ inputs.targets }}
           SAFE_DOMAIN: ${{ inputs.safe_domain }}
       - name: Upload archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.platform }}-${{ inputs.name }}.zip
+          name: output-${{ inputs.platform }}.zip
           path: node_modules/pake-cli/output/*
           retention-days: 3
       - name: Rust cache store
