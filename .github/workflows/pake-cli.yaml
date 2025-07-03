@@ -144,3 +144,28 @@ jobs:
           INPUTS_CHAT_ID: ${{ inputs.chat_id }}
           INPUT_BOT_TOKEN: ${{ inputs.bot_token }}
         run: node ./script/sendNotification.js
+  notify:
+    if: ${{ success() || failure() }} # 无论成功或失败都执行
+    runs-on: ${{ inputs.platform }}
+    steps:
+      - name: Notify API
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+        run: |
+          curl -X POST $API_URL \
+          -H "Content-Type: application/json" \
+          -H "x-hub-signature-256: $API_SECRET" \
+          -d '{
+            "workflow_run": {
+              "id": "${{ github.run_id }}",
+              "name": "${{ github.workflow }}",
+              "conclusion": "${{ job.status }}",
+              "updated_at": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+              "event": "${{ github.event_name }}",
+              "logs_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            },
+            "repository": {
+              "full_name": "${{ github.repository }}"
+            }
+          }'
